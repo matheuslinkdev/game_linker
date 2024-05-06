@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header style={{display: "flex", width: "100dvw", justifyContent: "space-between", padding: "0 10px", backgroundColor: "#453462"}}>
+    <header style={{display: "flex", width: "100%", justifyContent: "space-between", padding: "0 10px", backgroundColor: "var(--chakra-colors-common-900)"}}>
         <h2>Game Linker</h2>
         <ul style={{display: "flex", width: "30%",justifyContent: "space-between"}}>
             <li>Link 1</li>

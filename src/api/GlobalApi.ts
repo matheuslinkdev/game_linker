@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const BASE_URL = "https://api.rawg.io/api/";
-const API_KEY = "54e082f6d8c44317ba8b367c1f0b9051";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 const fetchData = async (urlParams) => {
   try {

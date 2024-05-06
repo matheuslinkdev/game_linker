@@ -1,22 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import MostPopular from "./Routes/MostPopular.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./Routes/HomePage.tsx";
 import ErrorPage from "./Routes/ErrorPage.tsx";
 import Header from "./Components/Common/Header.tsx";
-
-const colors = {
-  brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
-  },
-};
-
-const theme = extendTheme({ colors });
+import { theme } from "./theme.tsx";
+import { Providers } from "./providers.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +24,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
+    <Providers>
       <main>
         <Header/>
         <RouterProvider router={router} />
       </main>
-    </ChakraProvider>
+    </Providers>
   </React.StrictMode>
 );

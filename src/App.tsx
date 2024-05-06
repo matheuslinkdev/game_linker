@@ -1,12 +1,9 @@
-import './App.css' // Importa a função getAllGames e useFetchData
-
-function App() {
- 
+const App = () => {
   return (
     <>
-
+       
     </>
-  );
+  )
 }
 
-export default App;
+export default App

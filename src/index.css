@@ -1,5 +1,5 @@
-main {
-  background-color: var(--chakra-colors-brand-700);
-  width: 100dvw;
-  min-height: 100dvh;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
