@@ -4,6 +4,21 @@ import {
   getAllGames,
   getBestSellingGames,
 } from "../api/GlobalApi";
+import {
+  Flex,
+  Card,
+  CardBody,
+  CardFooter,
+  Image,
+  Stack,
+  Heading,
+  Text,
+  Divider,
+  ButtonGroup,
+  Button,
+} from "@chakra-ui/react";
+import GameCard from "../Components/Fragments/GameCard";
+import GameModal from "../Components/Layout/GameModal";
 
 const MostPopular = () => {
   const [games, setGames] = useState([]); // Estado para armazenar os jogos
@@ -11,7 +26,7 @@ const MostPopular = () => {
   // Chamada para buscar os jogos usando o gancho personalizado useFetchData
   useFetchData(getAllGames);
 
-  // Efeito para atualizar o estado dos jogos quando os dados forem recebidos
+  // Atualizar o estado dos jogos quando os dados forem recebidos
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,16 +38,21 @@ const MostPopular = () => {
     };
 
     fetchData();
-  }, []); // Executa o efeito somente uma vez quando o componente é montado
+  }, []);
 
   return (
     <>
-      MostPopular
-      <ul>
-        {games.map((game) => (
-          <li key={game.id}>{game.name}</li> // Renderiza o nome de cada jogo
-        ))}
-      </ul>
+      <Flex
+        flexWrap="wrap"
+        gap="20px"
+        justifyContent="center"
+        alignItems="center"
+        mt={20}
+        maxWidth="95%"
+        margin="5dvh auto"
+      >
+       <GameCard games={games}/>
+      </Flex>
     </>
   );
 };

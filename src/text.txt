@@ -1,0 +1,5 @@
+src={game.short_screenshots[1].image} Route for screenshots of the game
+
+
+// Como evitar de escrever o código de itens que serão renderizados diretamente no componente principal
+// Ou seja, como limpar seu código e criar componentes reutilizáveis

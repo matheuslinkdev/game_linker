@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { ChakraProvider } from "@chakra-ui/react";
 import MostPopular from "./Routes/MostPopular.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./Routes/HomePage.tsx";
 import ErrorPage from "./Routes/ErrorPage.tsx";
 import Header from "./Components/Common/Header.tsx";
-import { theme } from "./theme.tsx";
 import { Providers } from "./providers.tsx";
 
 const router = createBrowserRouter([
