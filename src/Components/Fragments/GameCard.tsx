@@ -13,6 +13,7 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import GameModal from "../Layout/GameModal";
+import { Link } from "react-router-dom";
 
 const GameCard = ({ games }) => {
   const isLoading = games.length === 0;
@@ -89,12 +90,10 @@ const GameCard = ({ games }) => {
               </CardBody>
               <Divider />
               <CardFooter>
-                <ButtonGroup spacing="2">
+                <Flex width={180} justifyContent="space-between" alignItems="center">
+                  <Link to={`/games/${game.id}`}>See More</Link>
                   <GameModal targetGame={game} />
-                  <Button variant="ghost" colorScheme="blue">
-                    Add to cart
-                  </Button>
-                </ButtonGroup>
+                </Flex>
               </CardFooter>
             </Card>
           ))}

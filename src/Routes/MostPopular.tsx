@@ -1,30 +1,10 @@
 import { useState, useEffect } from "react";
-import {
-  useFetchData,
-  getAllGames,
-  getBestSellingGames,
-} from "../api/GlobalApi";
-import {
-  Flex,
-  Card,
-  CardBody,
-  CardFooter,
-  Image,
-  Stack,
-  Heading,
-  Text,
-  Divider,
-  ButtonGroup,
-  Button,
-} from "@chakra-ui/react";
+import { getBestSellingGames } from "../api/GlobalApi";
+import { Flex } from "@chakra-ui/react";
 import GameCard from "../Components/Fragments/GameCard";
-import GameModal from "../Components/Layout/GameModal";
 
 const MostPopular = () => {
   const [games, setGames] = useState([]); // Estado para armazenar os jogos
-
-  // Chamada para buscar os jogos usando o gancho personalizado useFetchData
-  useFetchData(getAllGames);
 
   // Atualizar o estado dos jogos quando os dados forem recebidos
   useEffect(() => {
@@ -32,6 +12,8 @@ const MostPopular = () => {
       try {
         const data = await getBestSellingGames();
         setGames(data.results); // Define os jogos recebidos no estado
+        console.log(data.results);
+        
       } catch (error) {
         console.error("Erro ao buscar os jogos:", error);
       }
@@ -51,7 +33,7 @@ const MostPopular = () => {
         maxWidth="95%"
         margin="5dvh auto"
       >
-       <GameCard games={games}/>
+        <GameCard games={games} />
       </Flex>
     </>
   );

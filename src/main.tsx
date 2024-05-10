@@ -7,6 +7,7 @@ import HomePage from "./Routes/HomePage.tsx";
 import ErrorPage from "./Routes/ErrorPage.tsx";
 import Header from "./Components/Common/Header.tsx";
 import { Providers } from "./providers.tsx";
+import GameDetails from "./Routes/GameDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/mostpopular",
     element: <MostPopular />,
+  },
+  {
+    path: "/games/:id",
+    element: <GameDetails />,
   },
 ]);
 

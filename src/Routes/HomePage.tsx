@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <>
       <Carousel/>
-      <Heading>Most Popular Games:</Heading>
+      <Heading m="auto" textAlign="center" my={10} fontWeight={400}>Most Popular Games:</Heading>
       <MostPopular/>
     </>
   );

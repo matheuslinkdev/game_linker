@@ -1,4 +1,4 @@
-import { Flex, Spacer, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { FaStar, FaRegStar, FaRegStarHalfStroke } from "react-icons/fa6";
 
 const Rating = ({ rating }) => {

@@ -35,8 +35,20 @@ const getAllGames = async () => {
   return await fetchData("");
 };
 
-const getGamesByGenre = async (genreId) => {
-  return await fetchData(`&genres=${genreId}`);
+const getGameDetails = async (id) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}games/${id}?key=${API_KEY}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Ocorreu um erro ao buscar os dados:", error);
+      throw error;
+    }
+};
+
+const getGamesByGenre = async (genre) => {
+  return await fetchData(`&genres=${genre}`);
 };
 
 const getTopRatedGames = async () => {
@@ -50,6 +62,7 @@ const getBestSellingGames = async () => {
 export {
   useFetchData,
   getAllGames,
+  getGameDetails,
   getGamesByGenre,
   getTopRatedGames,
   getBestSellingGames,

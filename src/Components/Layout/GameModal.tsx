@@ -10,7 +10,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Tag,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import ModalCarousel from "../ModalCarousel";
@@ -27,7 +26,7 @@ const GameModal = ({ targetGame }) => {
         color="common.100"
         _hover={{ bgColor: "blue.900" }}
       >
-        See More
+        Resume
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
@@ -39,7 +38,7 @@ const GameModal = ({ targetGame }) => {
             <ModalCarousel game={targetGame} />
             <Rating rating={targetGame.rating} />
             {targetGame.genres.map((genre) => (
-              <Tag m="0 2px" bgColor="blue.900" color="common.100" mt={2}>
+              <Tag m="0 2px" bgColor="blue.900" color="common.100" mt={2} key={genre.name}>
                 {genre.name}
               </Tag>
             ))}
@@ -47,7 +46,7 @@ const GameModal = ({ targetGame }) => {
               <Heading size="md">Available in:</Heading>
               <Flex flexDir="row" flexWrap="wrap" gap="5px">
                 {targetGame.parent_platforms.map((platform) => (
-                  <Tag m="0 2px" bgColor="blue.900" color="common.100" mt={2}>
+                  <Tag m="0 2px" bgColor="blue.900" color="common.100" mt={2} key={platform.platform.name}>
                     {platform.platform.name}
                   </Tag>
                 ))}

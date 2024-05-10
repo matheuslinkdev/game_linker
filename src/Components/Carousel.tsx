@@ -54,16 +54,15 @@ const Carousel = () => {
       {!isLoading && ( // Render carousel heading if isLoading is false
         <Center
           position="absolute"
-          bgColor="#25252587"
+          bgColor="#25252599"
           h="100%"
           w="100%"
           top={0}
           left={0}
         >
           <Heading
-            color="common.100"
+            color="common.50"
             position="absolute"
-            bottom={0}
             fontWeight={400}
           >
             {carouselGames[currentIndex]?.name}
