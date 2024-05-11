@@ -36,7 +36,7 @@ const Carousel = () => {
   }, [currentIndex, carouselGames]);
 
   return (
-    <Center w="100%" h="100%" bgColor="common.900" position="relative">
+    <Center w="100%" h="auto" bgColor="common.900" position="relative">
       {isLoading ? ( // Render skeletons if isLoading is true
         <Skeleton w="700px" h="400px" maxH="50dvh" />
       ) : (

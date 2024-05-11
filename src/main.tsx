@@ -1,37 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import MostPopular from "./Routes/MostPopular.tsx";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./Routes/HomePage.tsx";
 import ErrorPage from "./Routes/ErrorPage.tsx";
 import Header from "./Components/Common/Header.tsx";
 import { Providers } from "./providers.tsx";
 import GameDetails from "./Routes/GameDetails.tsx";
-
-const router = createBrowserRouter([
-  {
-    path: "/*",
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/mostpopular",
-    element: <MostPopular />,
-  },
-  {
-    path: "/games/:id",
-    element: <GameDetails />,
-  },
-]);
+import Genres from "./Routes/Genres.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Providers>
-      <main>
-        <Header/>
-        <RouterProvider router={router} />
-      </main>
+      <Router>
+        <main style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", minHeight: "100dvh"}}>
+
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/mostpopular" element={<MostPopular />} />
+          <Route path="/games/:id" element={<GameDetails />} />
+          <Route path="/genres" element={<Genres />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        </main>
+      </Router>
     </Providers>
   </React.StrictMode>
 );

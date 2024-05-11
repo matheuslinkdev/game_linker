@@ -4,7 +4,7 @@ import axios from "axios";
 const BASE_URL = "https://api.rawg.io/api/";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const fetchData = async (urlParams) => {
+const fetchData = async (urlParams: string) => {
   try {
     const response = await axios.get(
       `${BASE_URL}games?key=${API_KEY}${urlParams}`
@@ -35,7 +35,7 @@ const getAllGames = async () => {
   return await fetchData("");
 };
 
-const getGameDetails = async (id) => {
+const getGameDetails = async (id: number) => {
     try {
       const response = await axios.get(
         `${BASE_URL}games/${id}?key=${API_KEY}`
@@ -47,8 +47,16 @@ const getGameDetails = async (id) => {
     }
 };
 
-const getGamesByGenre = async (genre) => {
-  return await fetchData(`&genres=${genre}`);
+const getGameGenres = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}genres?key=${API_KEY}`
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Ocorreu um erro ao buscar os dados:", error);
+        throw error;
+      }
 };
 
 const getTopRatedGames = async () => {
@@ -63,7 +71,7 @@ export {
   useFetchData,
   getAllGames,
   getGameDetails,
-  getGamesByGenre,
+  getGameGenres,
   getTopRatedGames,
   getBestSellingGames,
 };
