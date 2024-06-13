@@ -9,11 +9,12 @@ import {
   Text,
   Divider,
   ButtonGroup,
-  Button,
   Skeleton,
+  Tag,
 } from "@chakra-ui/react";
 import GameModal from "../Layout/GameModal";
 import { Link } from "react-router-dom";
+import { useGame } from "../../Context/GameContext";
 
 const GameCard = ({ games }) => {
   const isLoading = games.length === 0;
@@ -52,7 +53,7 @@ const GameCard = ({ games }) => {
               <CardBody>
                 <Image
                   src={game.background_image}
-                  alt="Green double couch with wooden legs"
+                  alt={`${game.name} Background Image`}
                   borderRadius="lg"
                   width="100%"
                   height="200px"
@@ -64,9 +65,20 @@ const GameCard = ({ games }) => {
                   <Heading size="md" fontWeight={400}>
                     {game.name}
                   </Heading>
-                  <Text display={{ base: "none", md: "block" }}>
-                    Rawg Io API, does not provide a game description. So check my GitHub: matheuslinkdev
-                  </Text>
+                  <Flex>
+                    {game.genres.map((genre) => (
+                      <Tag
+                        m="0 2px"
+                        bgColor="blue.900"
+                        color="common.100"
+                        mt={2}
+                        key={genre.name}
+                        width="auto"
+                      >
+                        {genre.name}
+                      </Tag>
+                    ))}
+                  </Flex>
                   <Flex alignItems="center">
                     <Text
                       color="blue.700"
@@ -90,7 +102,11 @@ const GameCard = ({ games }) => {
               </CardBody>
               <Divider />
               <CardFooter>
-                <Flex width={180} justifyContent="space-between" alignItems="center">
+                <Flex
+                  width={180}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
                   <Link to={`/games/${game.id}`}>See More</Link>
                   <GameModal targetGame={game} />
                 </Flex>

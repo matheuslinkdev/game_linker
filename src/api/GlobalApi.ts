@@ -37,9 +37,7 @@ const getAllGames = async () => {
 
 const getGameDetails = async (id: number) => {
     try {
-      const response = await axios.get(
-        `${BASE_URL}games/${id}?key=${API_KEY}`
-      );
+      const response = await axios.get(`${BASE_URL}games/${id}?key=${API_KEY}`);
       return response.data;
     } catch (error) {
       console.error("Ocorreu um erro ao buscar os dados:", error);

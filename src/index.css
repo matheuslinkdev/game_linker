@@ -11,3 +11,7 @@ h1, h2, h3, h4, h5{
 p{
   color: var(--chakra-colors-common-100);
 }
+
+a{
+  font-weight: 500;
+}

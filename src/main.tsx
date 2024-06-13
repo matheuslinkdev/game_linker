@@ -15,8 +15,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Providers>
       <Router>
         <main style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", minHeight: "100dvh"}}>
+        
 
-        <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/mostpopular" element={<MostPopular />} />
