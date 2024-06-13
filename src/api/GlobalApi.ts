@@ -45,6 +45,28 @@ const getGameDetails = async (id: number) => {
     }
 };
 
+const searchGame = async (term: string) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}games?key=${API_KEY}&search=${term}?ordering=-metacritic&search_exact=false&search_precise=false`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Ocorreu um erro ao buscar os dados:", error);
+      throw error;
+    }
+};
+
+const getGameAdditions = async (id: number) => {
+    try {
+      const response = await axios.get(`${BASE_URL}games/${id}/additions?key=${API_KEY}`);
+      return response.data;
+    } catch (error) {
+      console.error("Ocorreu um erro ao buscar os dados:", error);
+      throw error;
+    }
+};
+
 const getGameGenres = async () => {
       try {
         const response = await axios.get(
@@ -57,6 +79,17 @@ const getGameGenres = async () => {
       }
 };
 
+const getGamesByGenre = async (genreId, page = 1, pageSize = 20) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}games?key=${API_KEY}&genres=${genreId}&page=${page}&page_size=${pageSize}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao buscar os jogos por gênero:", error);
+    throw error;
+  }
+};
 const getTopRatedGames = async () => {
   return await fetchData("&ordering=-rating");
 };
@@ -72,4 +105,7 @@ export {
   getGameGenres,
   getTopRatedGames,
   getBestSellingGames,
+  getGameAdditions,
+  searchGame,
+  getGamesByGenre
 };

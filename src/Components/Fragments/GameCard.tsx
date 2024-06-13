@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import GameModal from "../Layout/GameModal";
 import { Link } from "react-router-dom";
-import { useGame } from "../../Context/GameContext";
 
 const GameCard = ({ games }) => {
   const isLoading = games.length === 0;
@@ -49,19 +48,34 @@ const GameCard = ({ games }) => {
             ))
         : // Render game cards when games are loaded
           games.map((game) => (
-            <Card maxW="sm" key={game.name} bgColor="blue.400">
-              <CardBody>
+            <Card
+              w={370}
+              maxW="95%"
+              h={400}
+              key={game.name}
+              bgColor="blue.400"
+              display="flex"
+              flexDirection="column"
+            >
+              <Flex>
                 <Image
-                  src={game.background_image}
+                  src={
+                    game.background_image ||
+                    "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                  }
                   alt={`${game.name} Background Image`}
-                  borderRadius="lg"
                   width="100%"
                   height="200px"
                   objectFit="cover"
-                  transition="all .2s linear"
-                  _hover={{ transform: "scale(1.05)" }}
                 />
-                <Stack mt="6" spacing="3">
+              </Flex>
+              <CardBody
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
+                flexGrow={1}
+              >
+                <Stack spacing="3">
                   <Heading size="md" fontWeight={400}>
                     {game.name}
                   </Heading>
@@ -101,7 +115,7 @@ const GameCard = ({ games }) => {
                 </Stack>
               </CardBody>
               <Divider />
-              <CardFooter>
+              <CardFooter position="absolute" bottom={0}>
                 <Flex
                   width={180}
                   justifyContent="space-between"

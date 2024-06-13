@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGameDetails } from "../api/GlobalApi";
+import { getGameAdditions, getGameDetails } from "../api/GlobalApi";
 import { useParams } from "react-router-dom";
 import {
   Box,
@@ -24,6 +24,9 @@ const GameDetails = () => {
       try {
         const data = await getGameDetails(id);
         console.log(data);
+
+        const additions = await getGameAdditions(id)
+        console.log(additions)
         setGame(data);
       } catch (error) {
         console.error("Erro ao buscar dados do Jogo:", error);
