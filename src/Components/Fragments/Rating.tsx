@@ -1,7 +1,11 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { FaStar, FaRegStar, FaRegStarHalfStroke } from "react-icons/fa6";
 
-const Rating = ({ rating }) => {
+interface RatingProps {
+  rating: number;
+}
+
+const Rating = ({ rating }: RatingProps) => {
   const stars = [];
 
   // Arredondando a avaliação para o número mais próximo
@@ -19,7 +23,13 @@ const Rating = ({ rating }) => {
   }
 
   return (
-    <Flex alignItems="center" justifyContent="space-between" w="140px" fontWeight={500} mt={2}>
+    <Flex
+      alignItems="center"
+      justifyContent="space-between"
+      w="140px"
+      fontWeight={500}
+      mt={2}
+    >
       <Text color="common.900">Rating: </Text>
       <Flex color="yellow.300">{stars} </Flex>
     </Flex>

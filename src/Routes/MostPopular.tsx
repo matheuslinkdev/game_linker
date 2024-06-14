@@ -4,14 +4,14 @@ import { Flex, Heading } from "@chakra-ui/react";
 import GameCard from "../Components/Fragments/GameCard";
 
 const MostPopular = () => {
-  const [games, setGames] = useState([]); // Estado para armazenar os jogos
+  const [games, setGames] = useState([]); 
 
   // Atualizar o estado dos jogos quando os dados forem recebidos
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getBestSellingGames();
-        setGames(data.results); // Define os jogos recebidos no estado
+        setGames(data.results);
         console.log(data.results);
         
       } catch (error) {

@@ -1,9 +1,15 @@
 import { Center, Flex, Heading, Image, Skeleton, Text } from "@chakra-ui/react";
 import { getBestSellingGames } from "../api/GlobalApi";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Carousel = () => {
-  const [carouselGames, setCarouselGames] = useState([]);
+interface CarouselProps {
+  background_image?: string;
+}
+
+const Carousel: React.FC<CarouselProps> = () => {
+  const [carouselGames, setCarouselGames] = useState<
+    { background_image?: string }[]
+  >([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -60,7 +66,7 @@ const Carousel = () => {
           top={0}
           left={0}
           alignItems="start"
-          p={{base: 8, md: 24}}
+          p={{ base: 8, md: 24 }}
           flexDir="column"
           justifyContent="center"
           textAlign="start"

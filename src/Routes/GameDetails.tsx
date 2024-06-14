@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getGameAdditions, getGameDetails } from "../api/GlobalApi";
 import { useParams } from "react-router-dom";
 import {
@@ -6,29 +6,35 @@ import {
   Flex,
   Grid,
   Heading,
-  Image,
   Img,
   Link,
   Tag,
   Text,
 } from "@chakra-ui/react";
-import { useGame } from "../Context/GameContext";
 import Rating from "../Components/Fragments/Rating";
 import Return from "../Components/Fragments/Return";
+import { GameProps } from "../types/globalTypes";
 
-const GameDetails = () => {
-  const { id } = useParams();
-  const [game, setGame] = useState();
+const GameDetails: React.FC = () => {
+  const { id } = useParams<{ id?: string }>();
+  const [game, setGame] = useState<GameProps | undefined>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getGameDetails(id);
-        console.log(data);
+        if (id) {
+          const gameId = parseInt(id, 10); // Convertendo id para número
+          if (!isNaN(gameId)) {
+            const data = await getGameDetails(gameId);
+            console.log(data);
 
-        const additions = await getGameAdditions(id);
-        console.log(additions);
-        setGame(data);
+            const additions = await getGameAdditions(gameId);
+            console.log(additions);
+            setGame(data);
+          } else {
+            console.error("ID inválido:", id);
+          }
+        }
       } catch (error) {
         console.error("Erro ao buscar dados do Jogo:", error);
       }
@@ -37,7 +43,7 @@ const GameDetails = () => {
     fetchData();
   }, [id]);
 
-  const shortenedDescription = (description) => {
+  const shortenedDescription = (description: string | undefined) => {
     if (!description) return "";
 
     let countDots = 0;
@@ -52,9 +58,14 @@ const GameDetails = () => {
 
     return description.substring(0, index);
   };
+
+  if (!id) {
+    return null; // Ou qualquer lógica para lidar com id undefined, como redirecionar para página de erro
+  }
+
   return (
     <>
-    <Return/>
+      <Return />
       <Flex
         w="auto"
         maxW="95dvw"
@@ -87,20 +98,18 @@ const GameDetails = () => {
               Developers:
             </Heading>
             <Flex flexWrap="wrap" gap={1}>
-              {game?.developers?.map((developer, index) => {
-                return (
-                  <Tag
-                    m="0 2px"
-                    bgColor="blue.900"
-                    color="common.100"
-                    mt={2}
-                    key={index}
-                    width="auto"
-                  >
-                    {developer?.name}
-                  </Tag>
-                );
-              })}
+              {game?.developers?.map((developer, index) => (
+                <Tag
+                  m="0 2px"
+                  bgColor="blue.900"
+                  color="common.100"
+                  mt={2}
+                  key={index}
+                  width="auto"
+                >
+                  {developer.name}
+                </Tag>
+              ))}
             </Flex>
           </Grid>
 
@@ -109,45 +118,45 @@ const GameDetails = () => {
               Platforms:
             </Heading>
             <Flex flexWrap="wrap" gap={1}>
-              {game?.platforms?.map((platform, index) => {
-                return (
-                  <Tag
-                    m="0 2px"
-                    bgColor="blue.900"
-                    color="common.100"
-                    mt={2}
-                    key={index}
-                    width="auto"
-                  >
-                    {platform.platform?.name}
-                  </Tag>
-                );
-              })}
+              {game?.platforms?.map((platform, index) => (
+                <Tag
+                  m="0 2px"
+                  bgColor="blue.900"
+                  color="common.100"
+                  mt={2}
+                  key={index}
+                  width="auto"
+                >
+                  {platform.platform.name}
+                </Tag>
+              ))}
             </Flex>
           </Grid>
+
           <Grid my={4}>
             <Heading size="md" fontWeight={400}>
               Stores:
             </Heading>
             <Flex flexWrap="wrap" gap={1}>
-              {game?.stores?.map((store, index) => {
-                return (
-                  <Tag
-                    m="0 2px"
-                    bgColor="blue.900"
-                    color="common.100"
-                    mt={2}
-                    key={index}
-                    width="auto"
-                  >
-                    {store.store?.name}
-                  </Tag>
-                );
-              })}
+              {game?.stores?.map((store, index) => (
+                <Tag
+                  m="0 2px"
+                  bgColor="blue.900"
+                  color="common.100"
+                  mt={2}
+                  key={index}
+                  width="auto"
+                >
+                  {store.store.name}
+                </Tag>
+              ))}
             </Flex>
-          <Text fontWeight={500} mt={2}>Released: {game?.released}</Text>
+          </Grid>
 
-          <Rating rating={game?.rating} />
+          <Text fontWeight={500} mt={2}>
+            Released: {game?.released}
+          </Text>
+          <Rating rating={game?.rating ?? 0} />
           <Link
             href={game?.website}
             target="_blank"
@@ -160,8 +169,6 @@ const GameDetails = () => {
           >
             Official Website
           </Link>
-          </Grid>
-
         </Box>
       </Flex>
     </>

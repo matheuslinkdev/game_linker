@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { searchGame } from "../../api/GlobalApi";
-import GameCard from "../Fragments/GameCard";
-import { Flex, FormLabel, Icon, Input } from "@chakra-ui/react";
+import { Flex, Icon, Input } from "@chakra-ui/react";
 import { IoSearch } from "react-icons/io5";
+import { StateProps } from "../../types/globalTypes";
 
-const SearchGame = ({ onSearchResults, setSidebarOpen }) => {
+const SearchGame: React.FC<StateProps> =({ onSearchResults, setSidebarOpen }: StateProps) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<[]>([]);
 
-  const handleChange = (event) => {
+  useEffect(()=>{
+    
+  }, [searchResults])
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const results = await searchGame(searchTerm);

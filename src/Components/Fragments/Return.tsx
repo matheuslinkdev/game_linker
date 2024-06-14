@@ -1,9 +1,8 @@
 import { Link } from '@chakra-ui/react'
-import React from 'react'
 
 const Return = () => {
   return (
-    <Link href='/'>Return</Link>
+    <Link href='/' color="blue.200" pos="absolute" left={2} top={2}>Return</Link>
   )
 }
 

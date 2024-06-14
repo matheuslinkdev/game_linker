@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Carousel from "../Components/Carousel";
 import SearchGame from "../Components/Form/SearchGame";
 import MostPopular from "./MostPopular";
@@ -15,11 +15,15 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedGenre, setSelectedGenre] = useState("");
 
-  const handleSearchResults = (results) => {
+  const handleSearchResults = (results: []) => {
     setResults(results);
   };
 
-  const handleFilteredResults = (results, genre, page) => {
+  const handleFilteredResults = (
+    results: [],
+    genre: SetStateAction<string>,
+    page: SetStateAction<number>
+  ) => {
     setResults(results);
     setSelectedGenre(genre);
     setCurrentPage(page);
@@ -30,7 +34,7 @@ const HomePage = () => {
     setSidebarOpen(false);
   };
 
-  const fetchGames = async (page) => {
+  const fetchGames = async (page: number) => {
     try {
       const data = await getGamesByGenre(selectedGenre, page);
       setResults(data.results);

@@ -1,7 +1,13 @@
-import {  Center, Image } from "@chakra-ui/react";
+import { Center, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-const ModalCarousel = ({ game }) => {
+interface GameProps {
+  game: {
+    short_screenshots: { image: string }[];
+  };
+}
+
+const ModalCarousel = ({ game }: GameProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

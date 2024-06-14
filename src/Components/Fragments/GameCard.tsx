@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Card,
@@ -15,7 +16,21 @@ import {
 import GameModal from "../Layout/GameModal";
 import { Link } from "react-router-dom";
 
-const GameCard = ({ games }) => {
+interface Game {
+  id: number;
+  name: string;
+  background_image?: string;
+  genres: { name: string }[];
+  rating: number;
+  parent_platforms: [];
+  short_screenshots: [];
+}
+
+interface GameCardProps {
+  games: Game[];
+}
+
+const GameCard: React.FC<GameCardProps> = ({ games }) => {
   const isLoading = games.length === 0;
 
   return (
@@ -23,7 +38,7 @@ const GameCard = ({ games }) => {
       {isLoading
         ? // Render skeletons if games are still loading
           Array(3)
-            .fill()
+            .fill(null)
             .map((_, index) => (
               <Card maxW="sm" key={index} bgColor="blue.400">
                 <Skeleton height="200px" />
@@ -52,7 +67,7 @@ const GameCard = ({ games }) => {
               w={370}
               maxW="95%"
               h={400}
-              key={game.name}
+              key={game.id}
               bgColor="blue.400"
               display="flex"
               flexDirection="column"
