@@ -1,4 +1,4 @@
-import { Center, Heading, Image, Skeleton } from "@chakra-ui/react";
+import { Center, Flex, Heading, Image, Skeleton, Text } from "@chakra-ui/react";
 import { getBestSellingGames } from "../api/GlobalApi";
 import { useEffect, useState } from "react";
 
@@ -43,31 +43,36 @@ const Carousel = () => {
         <Center>
           <Image
             src={carouselGames[currentIndex]?.background_image}
-            w="700px"
+            w="100dvw"
             maxWidth="100%"
-            h="400px"
-            maxH="50dvh"
+            h="600px"
+            maxH={{ base: "30dvh", md: "70dvh" }}
             objectFit="cover"
           />
         </Center>
       )}
       {!isLoading && ( // Render carousel heading if isLoading is false
-        <Center
+        <Flex
           position="absolute"
-          bgColor="#25252599"
+          bgColor="#151515cc"
           h="100%"
           w="100%"
           top={0}
           left={0}
+          alignItems="start"
+          p={{base: 8, md: 24}}
+          flexDir="column"
+          justifyContent="center"
+          textAlign="start"
         >
-          <Heading
-            color="common.50"
-            position="absolute"
-            fontWeight={400}
-          >
-            {carouselGames[currentIndex]?.name}
+          <Heading color="common.50" fontWeight={400} mb={1}>
+            GameLinker
           </Heading>
-        </Center>
+          <Text w={400} fontWeight={500} maxW="95%">
+            Discover the latest and most popular games, explore various genres,
+            and find your next favorite game today. Enjoy browsing!
+          </Text>
+        </Flex>
       )}
     </Center>
   );

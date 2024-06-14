@@ -39,6 +39,7 @@ const SearchGame = ({ onSearchResults, setSidebarOpen }) => {
             color="common.100"
             fontWeight={500}
             _placeholder={{color: "common.200"}}
+            w={300}
           />
           <button type="submit">
             <Icon as={IoSearch} color="common.100" ml={2} mt={1}/>

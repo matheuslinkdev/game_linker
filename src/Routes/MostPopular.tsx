@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getBestSellingGames } from "../api/GlobalApi";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import GameCard from "../Components/Fragments/GameCard";
 
 const MostPopular = () => {
@@ -24,6 +24,7 @@ const MostPopular = () => {
 
   return (
     <>
+    <Heading fontWeight={400} ml={24} mt={4}>Most Popular Games:</Heading>
       <Flex
         flexWrap="wrap"
         gap="20px"

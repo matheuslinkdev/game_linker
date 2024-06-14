@@ -51,7 +51,7 @@ const HomePage = () => {
   };
 
   return (
-    <Flex flexDir="column" mt="10dvh">
+    <Flex flexDir="column">
       {results.length === 0 && <Carousel />}
 
       <Icon
@@ -63,18 +63,20 @@ const HomePage = () => {
         position="absolute"
         left={2}
         top={4}
-        bg="blue.200"
+        bg="blue.400"
         borderRadius="50%"
+        boxShadow="0 0 6px 2px var(--chakra-colors-blue-900)"
         p={2}
+        zIndex={999999}
       />
 
       <Flex
         position="absolute"
         left={0}
-        top="10dvh"
-        bg="blue.500"
-        w={300}
-        h="90dvh"
+        top="0"
+        bg="#0762f2ee"
+        w={{ base: "100%", md: 400 }}
+        h="70dvh"
         borderRadius="0 0 10px 0"
         zIndex={999}
         transition="all 0.3s ease-in-out"
@@ -82,12 +84,16 @@ const HomePage = () => {
       >
         {sidebarOpen && (
           <Flex margin="auto" flexDir="column" alignItems="start" p={2}>
-            <Heading size="md" fontWeight={400} mb={2}>Search for a game:</Heading>
+            <Heading size="md" fontWeight={400} mb={2}>
+              Search for a game:
+            </Heading>
             <SearchGame
               onSearchResults={handleSearchResults}
               setSidebarOpen={setSidebarOpen}
             />
-            <Heading size="md" mt={4} fontWeight={400}>Filter by Genre:</Heading>
+            <Heading size="md" mt={4} fontWeight={400}>
+              Filter by Genre:
+            </Heading>
             <Filters
               onFilterResults={handleFilteredResults}
               currentPage={currentPage}

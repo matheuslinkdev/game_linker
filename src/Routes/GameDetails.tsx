@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useGame } from "../Context/GameContext";
 import Rating from "../Components/Fragments/Rating";
+import Return from "../Components/Fragments/Return";
 
 const GameDetails = () => {
   const { id } = useParams();
@@ -25,8 +26,8 @@ const GameDetails = () => {
         const data = await getGameDetails(id);
         console.log(data);
 
-        const additions = await getGameAdditions(id)
-        console.log(additions)
+        const additions = await getGameAdditions(id);
+        console.log(additions);
         setGame(data);
       } catch (error) {
         console.error("Erro ao buscar dados do Jogo:", error);
@@ -53,8 +54,10 @@ const GameDetails = () => {
   };
   return (
     <>
+    <Return/>
       <Flex
-        w="95%"
+        w="auto"
+        maxW="95dvw"
         margin="auto"
         bg="blue.600"
         borderRadius="15px"
@@ -80,8 +83,10 @@ const GameDetails = () => {
 
         <Box ml={2} maxWidth="100%" flexDir="column">
           <Grid my={4}>
-            <Heading size="lg" fontWeight={400}>Developers:</Heading>
-            <Flex>
+            <Heading size="md" fontWeight={400}>
+              Developers:
+            </Heading>
+            <Flex flexWrap="wrap" gap={1}>
               {game?.developers?.map((developer, index) => {
                 return (
                   <Tag
@@ -98,10 +103,12 @@ const GameDetails = () => {
               })}
             </Flex>
           </Grid>
-      
+
           <Grid my={4}>
-            <Heading size="lg" fontWeight={400}>Platforms:</Heading>
-            <Flex>
+            <Heading size="md" fontWeight={400}>
+              Platforms:
+            </Heading>
+            <Flex flexWrap="wrap" gap={1}>
               {game?.platforms?.map((platform, index) => {
                 return (
                   <Tag
@@ -119,8 +126,10 @@ const GameDetails = () => {
             </Flex>
           </Grid>
           <Grid my={4}>
-            <Heading size="lg" fontWeight={400}>Stores:</Heading>
-            <Flex>
+            <Heading size="md" fontWeight={400}>
+              Stores:
+            </Heading>
+            <Flex flexWrap="wrap" gap={1}>
               {game?.stores?.map((store, index) => {
                 return (
                   <Tag
@@ -136,13 +145,23 @@ const GameDetails = () => {
                 );
               })}
             </Flex>
-          </Grid>
-
-          <Text>Released: {game?.released}</Text>
-          
-        <Link href={game?.website} target="_blank" color="blue.50" bg="blue.800" p={2} borderRadius="10px">Official Website</Link>
+          <Text fontWeight={500} mt={2}>Released: {game?.released}</Text>
 
           <Rating rating={game?.rating} />
+          <Link
+            href={game?.website}
+            target="_blank"
+            w={135}
+            color="blue.50"
+            bg="blue.800"
+            p={2}
+            borderRadius="5px"
+            mt={2}
+          >
+            Official Website
+          </Link>
+          </Grid>
+
         </Box>
       </Flex>
     </>

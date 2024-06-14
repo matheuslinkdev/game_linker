@@ -4,7 +4,7 @@ export const theme = extendTheme({
   styles: {
     global: {
       "html, body": {
-        bgGradient: "linear(to-b, blue.700, blue.900)",
+        bgGradient: "linear(130deg, #202020, #114597)",
         backgroundAttachment: "fixed",
         minHeight: "100dvh",
         width: "100%",
@@ -25,8 +25,8 @@ export const theme = extendTheme({
       "900": "#121212",
       "950": "#050505",
       transparent: {
-        "950": "#050505cc"
-      }
+        "950": "#050505cc",
+      },
     },
   },
 });
