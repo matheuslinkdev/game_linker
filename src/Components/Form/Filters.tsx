@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Flex } from "@chakra-ui/react";
+import { Flex, Button, Tag, Heading } from "@chakra-ui/react";
 import { getGameGenres, getGamesByGenre } from "../../api/GlobalApi";
-import GameCard from "../Fragments/GameCard";
 
-const Filters = () => {
+const Filters = ({
+  onFilterResults,
+  currentPage,
+  setCurrentPage,
+  setSelectedGenre,
+}) => {
   const [genres, setGenres] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [games, setGames] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [localSelectedGenre, setLocalSelectedGenre] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,72 +24,44 @@ const Filters = () => {
     fetchData();
   }, []);
 
-  const handleGenreChange = (event) => {
-    setSelectedGenre(event.target.value);
+  useEffect(() => {
+    if (localSelectedGenre !== "") {
+      fetchGamesByGenre(localSelectedGenre, currentPage);
+    }
+  }, [localSelectedGenre, currentPage]);
+
+  const handleGenreChange = (genreId) => {
+    setLocalSelectedGenre(genreId);
+    setSelectedGenre(genreId);
+    setCurrentPage(1);
   };
 
-  const fetchGamesByGenre = async () => {
+  const fetchGamesByGenre = async (genre, page) => {
     try {
-      const data = await getGamesByGenre(selectedGenre, currentPage);
-      setGames(data.results);
+      const data = await getGamesByGenre(genre, page);
+      onFilterResults(data.results, genre, page);
     } catch (error) {
       console.error("Erro ao buscar os jogos por gênero:", error);
-    }
-  };
-
-  // Handler para avançar para a próxima página de jogos
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-    fetchGamesByGenre();
-  };
-
-  // Handler para voltar para a página anterior de jogos
-  const prevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-      fetchGamesByGenre();
+      onFilterResults([], genre, page);
     }
   };
 
   return (
-    <Flex flexDirection="column" alignItems="center">
-      <Select
-        value={selectedGenre}
-        onChange={handleGenreChange}
-        mb={4}
-        placeholder="Selecione um gênero"
-      >
+    <Flex flexDirection="column" alignItems="center" mt={2}>
+
+      <Flex alignItems="center" flexWrap="wrap" gap={2}>
         {genres.map((genre) => (
-          <option key={genre.id} value={genre.id}>
+          <Tag
+            key={genre.id}
+            onClick={() => handleGenreChange(genre.id)}
+            bg="blue.700"
+            color="common.100"
+            _hover={{cursor: "pointer", bg: "blue.800"}}
+            transition=".3s ease"
+          >
             {genre.name}
-          </option>
+          </Tag>
         ))}
-      </Select>
-      <Button colorScheme="blue" onClick={fetchGamesByGenre} mb={4}>
-        Buscar Jogos
-      </Button>
-      <Flex
-        flexWrap="wrap"
-        gap="20px"
-        justifyContent="center"
-        alignItems="center"
-        mt={20}
-        maxWidth="95%"
-        margin="5dvh auto"
-      >
-        {games.length > 0 && (
-          <>
-            <GameCard games={games} />
-            <Flex mt={4}>
-              <Button onClick={prevPage} disabled={currentPage === 1}>
-                Página Anterior
-              </Button>
-              <Button ml={2} onClick={nextPage}>
-                Próxima Página
-              </Button>
-            </Flex>
-          </>
-        )}
       </Flex>
     </Flex>
   );

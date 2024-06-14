@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { searchGame } from "../../api/GlobalApi";
 import GameCard from "../Fragments/GameCard";
-import { Flex } from "@chakra-ui/react";
+import { Flex, FormLabel, Icon, Input } from "@chakra-ui/react";
+import { IoSearch } from "react-icons/io5";
 
-const SearchGame = ({ onSearchResults }) => {
+const SearchGame = ({ onSearchResults, setSidebarOpen }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -17,44 +18,34 @@ const SearchGame = ({ onSearchResults }) => {
       const results = await searchGame(searchTerm);
       setSearchResults(results.results);
       onSearchResults(results.results);
+      setSidebarOpen(false)
     } catch (error) {
       console.error("Error fetching search results:", error);
-      onSearchResults([]); // Reset results in case of error
+      onSearchResults([]);
     }
   };
 
   return (
-    <div>
+    <Flex>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search for a game..."
-          value={searchTerm}
-          onChange={handleChange}
-        />
-        <button type="submit">Search</button>
+  
+        <Flex alignItems="center">
+          <Input
+            type="text"
+            placeholder="Search for a game..."
+            value={searchTerm}
+            onChange={handleChange}
+            borderRadius="30px"
+            color="common.100"
+            fontWeight={500}
+            _placeholder={{color: "common.200"}}
+          />
+          <button type="submit">
+            <Icon as={IoSearch} color="common.100" ml={2} mt={1}/>
+          </button>
+        </Flex>
       </form>
-
-      <div>
-        {searchResults.length > 0 ? (
-          <>
-            <Flex
-              flexWrap="wrap"
-              gap="20px"
-              justifyContent="center"
-              alignItems="center"
-              mt={20}
-              maxWidth="95%"
-              margin="5dvh auto"
-            >
-              <GameCard games={searchResults} />
-            </Flex>
-          </>
-        ) : (
-          <p>No results found.</p>
-        )}
-      </div>
-    </div>
+    </Flex>
   );
 };
 
