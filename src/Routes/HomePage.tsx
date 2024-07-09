@@ -2,12 +2,13 @@ import { SetStateAction, useState } from "react";
 import Carousel from "../Components/Carousel";
 import SearchGame from "../Components/Form/SearchGame";
 import MostPopular from "./MostPopular";
-import { Flex, Icon, Button, Heading } from "@chakra-ui/react";
+import { Flex, Icon, Button, Heading, Tag } from "@chakra-ui/react";
 import Filters from "../Components/Form/Filters";
 import GameCard from "../Components/Fragments/GameCard";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack, IoMdHeart } from "react-icons/io";
 
 import { getGamesByGenre } from "../api/GlobalApi";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [results, setResults] = useState([]);
@@ -76,18 +77,20 @@ const HomePage = () => {
 
       <Flex
         position="absolute"
+        flexDir="column"
         left={0}
         top="0"
-        bg="#0762f2ee"
+        bg="#0762f2"
         w={{ base: "100%", md: 400 }}
         h="70dvh"
         borderRadius="0 0 10px 0"
         zIndex={999}
         transition="all 0.3s ease-in-out"
         transform={sidebarOpen ? "translateX(0)" : "translateX(-100%)"}
+        p={2}
       >
         {sidebarOpen && (
-          <Flex margin="auto" flexDir="column" alignItems="start" p={2}>
+          <Flex margin="auto" flexDir="column" alignItems="start">
             <Heading size="md" fontWeight={400} mb={2}>
               Search for a game:
             </Heading>
@@ -106,6 +109,20 @@ const HomePage = () => {
             />
           </Flex>
         )}
+        <Link to="wishlist" style={{ width: "130px" }}>
+          <Tag
+          bg="red.500"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            _hover={{bg: "red.600"}}
+            transition=".2s ease"
+            p={1} 
+          >
+            My Favorites
+            <Icon as={IoMdHeart} color="blue.800" _hover={{color: "blue.500"}}/>
+          </Tag>
+        </Link>
       </Flex>
 
       {results.length === 0 && <MostPopular />}
