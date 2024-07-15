@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { getBestSellingGames } from "../api/GlobalApi";
 import { Flex, Heading } from "@chakra-ui/react";
-import GameCard from "../Components/Fragments/GameCard";
+import GameListBox from "../Components/Custom/GameListBox";
 
 const MostPopular = () => {
-  const [games, setGames] = useState([]); 
+  const [games, setGames] = useState([]);
 
   // Atualizar o estado dos jogos quando os dados forem recebidos
   useEffect(() => {
@@ -13,7 +13,6 @@ const MostPopular = () => {
         const data = await getBestSellingGames();
         setGames(data.results);
         console.log(data.results);
-        
       } catch (error) {
         console.error("Erro ao buscar os jogos:", error);
       }
@@ -24,18 +23,10 @@ const MostPopular = () => {
 
   return (
     <>
-    <Heading fontWeight={400} ml={24} mt={4}>Most Popular Games:</Heading>
-      <Flex
-        flexWrap="wrap"
-        gap="20px"
-        justifyContent="center"
-        alignItems="center"
-        mt={20}
-        maxWidth="95%"
-        margin="5dvh auto"
-      >
-        <GameCard games={games} />
-      </Flex>
+      <Heading fontWeight={400} ml={24} mt={4}>
+        Most Popular Games:
+      </Heading>
+      <GameListBox games={games} />
     </>
   );
 };

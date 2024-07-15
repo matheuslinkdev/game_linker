@@ -12,26 +12,29 @@ import {
   ButtonGroup,
   Skeleton,
   Tag,
+  Icon,
 } from "@chakra-ui/react";
 import GameModal from "../Layout/GameModal";
 import { Link } from "react-router-dom";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { useFavorites } from "../../Context/FavoritesContext";
 
-interface Game {
-  id: number;
-  name: string;
-  background_image?: string;
-  genres: { name: string }[];
-  rating: number;
-  parent_platforms: [];
-  short_screenshots: [];
-}
+const GameCard = ({ games }) => {
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-interface GameCardProps {
-  games: Game[];
-}
-
-const GameCard: React.FC<GameCardProps> = ({ games }) => {
   const isLoading = games.length === 0;
+
+  const isFavorite = (game) => {
+    return favorites.some((fav) => fav.id === game.id);
+  };
+
+  const handleToggleFavorite = (game) => {
+    if (isFavorite(game)) {
+      removeFavorite(game);
+    } else {
+      addFavorite(game);
+    }
+  };
 
   return (
     <>
@@ -139,6 +142,12 @@ const GameCard: React.FC<GameCardProps> = ({ games }) => {
                   <Link to={`/games/${game.id}`}>See More</Link>
                   <GameModal targetGame={game} />
                 </Flex>
+                <Icon
+                  as={isFavorite(game) ? IoMdHeart : IoMdHeartEmpty}
+                  onClick={() => handleToggleFavorite(game)}
+                  cursor="pointer"
+                  color={isFavorite(game) ? "red.500" : "gray.500"}
+                />
               </CardFooter>
             </Card>
           ))}

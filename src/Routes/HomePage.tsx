@@ -4,11 +4,11 @@ import SearchGame from "../Components/Form/SearchGame";
 import MostPopular from "./MostPopular";
 import { Flex, Icon, Button, Heading, Tag } from "@chakra-ui/react";
 import Filters from "../Components/Form/Filters";
-import GameCard from "../Components/Fragments/GameCard";
 import { IoIosArrowForward, IoIosArrowBack, IoMdHeart } from "react-icons/io";
 
 import { getGamesByGenre } from "../api/GlobalApi";
 import { Link } from "react-router-dom";
+import GameListBox from "../Components/Custom/GameListBox";
 
 const HomePage = () => {
   const [results, setResults] = useState([]);
@@ -109,18 +109,22 @@ const HomePage = () => {
             />
           </Flex>
         )}
-        <Link to="wishlist" style={{ width: "130px" }}>
+        <Link to="favorites" style={{ width: "130px" }}>
           <Tag
-          bg="red.500"
+            bg="red.500"
             display="flex"
             alignItems="center"
             justifyContent="center"
-            _hover={{bg: "red.600"}}
+            _hover={{ bg: "red.600" }}
             transition=".2s ease"
-            p={1} 
+            p={1}
           >
             My Favorites
-            <Icon as={IoMdHeart} color="blue.800" _hover={{color: "blue.500"}}/>
+            <Icon
+              as={IoMdHeart}
+              color="blue.800"
+              _hover={{ color: "blue.500" }}
+            />
           </Tag>
         </Link>
       </Flex>
@@ -128,17 +132,7 @@ const HomePage = () => {
       {results.length === 0 && <MostPopular />}
       {results.length > 0 && (
         <>
-          <Flex
-            flexWrap="wrap"
-            gap="20px"
-            justifyContent="center"
-            alignItems="center"
-            mt={20}
-            maxWidth="95%"
-            margin="5dvh auto"
-          >
-            <GameCard games={results} />
-          </Flex>
+          <GameListBox games={results} />
           <Flex mt={4} justifyContent="center" mb={4}>
             <Button onClick={prevPage} disabled={currentPage === 1}>
               Previous

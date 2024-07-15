@@ -8,7 +8,7 @@ import ErrorPage from "./Routes/ErrorPage.tsx";
 import { Providers } from "./providers.tsx";
 import GameDetails from "./Routes/GameDetails.tsx";
 import Genres from "./Routes/Genres.tsx";
-import Wishlist from "./Routes/Wishlist.tsx";
+import Favorites from "./Routes/Favorites.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -29,7 +29,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/mostpopular" element={<MostPopular />} />
             <Route path="/games/:id" element={<GameDetails />} />
             <Route path="/genres" element={<Genres />} />
-            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </main>
