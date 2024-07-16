@@ -20,9 +20,9 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { useFavorites } from "../../Context/FavoritesContext";
 import { GameProps, GenreProps } from "../../types/globalTypes";
 
-type GamesProps ={
-  games: GameProps[]
-}
+type GamesProps = {
+  games: GameProps[];
+};
 
 const GameCard = ({ games }: GamesProps) => {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
@@ -102,15 +102,20 @@ const GameCard = ({ games }: GamesProps) => {
                   <Heading size="md" fontWeight={400}>
                     {game.name}
                   </Heading>
-                  <Flex flexWrap="wrap" gap={2}>
+                  <Flex
+                    maxW="100%"
+                    overflowX="auto"
+                    whiteSpace="nowrap"
+                    className="custom-scrollbar"
+                  >
                     {game.genres.map((genre: GenreProps) => (
                       <Tag
                         m="0 2px"
                         bgColor="blue.900"
                         color="common.100"
-                        mt={2}
                         key={genre.name}
                         width="auto"
+                        flexShrink={0}
                       >
                         {genre.name}
                       </Tag>

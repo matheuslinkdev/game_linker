@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getGameAdditions, getGameDetails } from "../api/GlobalApi";
+import { getGameDetails } from "../api/GlobalApi";
 import { useParams } from "react-router-dom";
 import {
   Box,
@@ -26,10 +26,7 @@ const GameDetails: React.FC = () => {
           const gameId = parseInt(id, 10); // Convertendo id para número
           if (!isNaN(gameId)) {
             const data = await getGameDetails(gameId);
-            console.log(data);
 
-            const additions = await getGameAdditions(gameId);
-            console.log(additions);
             setGame(data);
           } else {
             console.error("ID inválido:", id);
@@ -68,7 +65,7 @@ const GameDetails: React.FC = () => {
       <Return />
       <Flex
         w="auto"
-        maxW="95dvw"
+        maxW="95%"
         margin="auto"
         bg="blue.600"
         borderRadius="15px"
@@ -77,23 +74,33 @@ const GameDetails: React.FC = () => {
         alignItems="center"
         flexWrap="wrap"
         gap={2}
+        my={4}
       >
-        <Box ml={2} maxWidth="100%" flexDir="column">
+        <Box
+          ml={2}
+          maxWidth="100%"
+          flexDir="column"
+          flex={{ base: "none", md: 1 }} // Não flexível em telas menores, flexível em telas maiores
+        >
           <Img
             src={game?.background_image}
             objectFit="cover"
-            width="500px"
-            maxWidth="100%"
+            maxWidth="95%"
             height="auto"
-            borderRadius={5}
+            borderRadius={6}
           />
-          <Text width="500px" maxWidth="100%" fontWeight={500} mt={2}>
+          <Text maxWidth="100%" fontWeight={500} mt={2}>
             {shortenedDescription(game?.description_raw)}
           </Text>
         </Box>
 
-        <Box ml={2} maxWidth="100%" flexDir="column">
-          <Grid my={4}>
+        <Box
+          ml={2}
+          maxWidth="100%"
+          flexDir="column"
+          flex={{ base: "none", md: 1 }} // Não flexível em telas menores, flexível em telas maiores
+        >
+          <Grid>
             <Heading size="md" fontWeight={400}>
               Developers:
             </Heading>
@@ -156,7 +163,9 @@ const GameDetails: React.FC = () => {
           <Text fontWeight={500} mt={2}>
             Released: {game?.released}
           </Text>
-          <Rating rating={game?.rating ?? 0} />
+          <Flex mb={4}>
+            <Rating rating={game?.rating ?? 0} />
+          </Flex>
           <Link
             href={game?.website}
             target="_blank"

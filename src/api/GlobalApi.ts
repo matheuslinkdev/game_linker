@@ -1,10 +1,8 @@
-import { useEffect } from "react";
 import axios from "axios";
 
 const BASE_URL = "https://api.rawg.io/api/";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-type FetchDataCallback<T> = () => Promise<T>;
 
 const fetchData = async (urlParams: string) => {
   try {
@@ -16,21 +14,6 @@ const fetchData = async (urlParams: string) => {
     console.error("Ocorreu um erro ao buscar os dados:", error);
     throw error;
   }
-};
-
-const useFetchData = <T>(callback: FetchDataCallback<T>) => {
-  useEffect(() => {
-    const fetchDataWrapper = async () => {
-      try {
-        const data = await callback();
-        console.log("Dados recebidos:", data);
-      } catch (error) {
-        console.error("Erro:", error);
-      }
-    };
-
-    fetchDataWrapper();
-  }, [callback]);
 };
 
 const getAllGames = async () => {
@@ -101,7 +84,6 @@ const getBestSellingGames = async () => {
 };
 
 export {
-  useFetchData,
   getAllGames,
   getGameDetails,
   getGameGenres,

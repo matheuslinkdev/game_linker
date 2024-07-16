@@ -20,8 +20,6 @@ const animation = `${zoomInOut} 10s infinite ease-in-out`;
 const FavoritesList = () => {
   const { favorites } = useFavorites();
 
-  console.log(favorites);
-
   return (
     <div>
       {favorites.length > 0 ? (

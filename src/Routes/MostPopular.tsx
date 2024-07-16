@@ -12,7 +12,6 @@ const MostPopular = () => {
       try {
         const data = await getBestSellingGames();
         setGames(data.results);
-        console.log(data.results);
       } catch (error) {
         console.error("Erro ao buscar os jogos:", error);
       }

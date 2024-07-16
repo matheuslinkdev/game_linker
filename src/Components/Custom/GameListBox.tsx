@@ -1,8 +1,12 @@
 import { Flex } from '@chakra-ui/react'
-import React from 'react'
 import GameCard from '../Fragments/GameCard';
+import { GameProps } from '../../types/globalTypes';
 
-const GameListBox = ({games}) => {
+type Props ={
+  games: GameProps[]
+}
+
+const GameListBox = ({games}: Props) => {
   return (
     <Flex
       flexWrap="wrap"

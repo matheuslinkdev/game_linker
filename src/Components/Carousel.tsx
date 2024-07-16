@@ -4,12 +4,11 @@ import React, { useEffect, useState } from "react";
 
 interface CarouselProps {
   background_image?: string;
+  name: string;
 }
 
 const Carousel: React.FC<CarouselProps> = () => {
-  const [carouselGames, setCarouselGames] = useState<
-    { background_image?: string }[]
-  >([]);
+  const [carouselGames, setCarouselGames] = useState<CarouselProps[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,6 +53,7 @@ const Carousel: React.FC<CarouselProps> = () => {
             h="600px"
             maxH={{ base: "30dvh", md: "70dvh" }}
             objectFit="cover"
+            alt={`Image of ${carouselGames[currentIndex]?.name}`}
           />
         </Center>
       )}
