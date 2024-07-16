@@ -13,6 +13,7 @@ import {
   Skeleton,
   Tag,
   Icon,
+  Center,
 } from "@chakra-ui/react";
 import GameModal from "../Layout/GameModal";
 import { Link } from "react-router-dom";
@@ -97,7 +98,7 @@ const GameCard = ({ games }) => {
                   <Heading size="md" fontWeight={400}>
                     {game.name}
                   </Heading>
-                  <Flex>
+                  <Flex flexWrap="wrap" gap={2}>
                     {game.genres.map((genre) => (
                       <Tag
                         m="0 2px"
@@ -133,7 +134,13 @@ const GameCard = ({ games }) => {
                 </Stack>
               </CardBody>
               <Divider />
-              <CardFooter position="absolute" bottom={0}>
+              <CardFooter
+                position="absolute"
+                bottom={0}
+                alignItems="center"
+                width="100%"
+                justifyContent="space-between"
+              >
                 <Flex
                   width={180}
                   justifyContent="space-between"
@@ -142,12 +149,14 @@ const GameCard = ({ games }) => {
                   <Link to={`/games/${game.id}`}>See More</Link>
                   <GameModal targetGame={game} />
                 </Flex>
-                <Icon
-                  as={isFavorite(game) ? IoMdHeart : IoMdHeartEmpty}
-                  onClick={() => handleToggleFavorite(game)}
-                  cursor="pointer"
-                  color={isFavorite(game) ? "red.500" : "gray.500"}
-                />
+                <Center bg="blue.100" borderRadius="full" p={2}>
+                  <Icon
+                    as={isFavorite(game) ? IoMdHeart : IoMdHeartEmpty}
+                    onClick={() => handleToggleFavorite(game)}
+                    cursor="pointer"
+                    color={isFavorite(game) ? "blue.800" : "blue.700"}
+                  />
+                </Center>
               </CardFooter>
             </Card>
           ))}

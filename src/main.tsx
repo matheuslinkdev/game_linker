@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             alignItems: "center",
             width: "100%",
             minHeight: "100dvh",
+            backgroundColor: "#12409bcc",
           }}
         >
           <Routes>

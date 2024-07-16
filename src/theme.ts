@@ -4,9 +4,9 @@ export const theme = extendTheme({
   styles: {
     global: {
       "html, body": {
-        bgGradient: "linear(130deg, #202020, #114597)",
+        bgImage: "url('/Game-Background-Graphics.webp')", // Define a imagem de fundo para html e body
         backgroundAttachment: "fixed",
-        minHeight: "100dvh",
+        minHeight: "100vh",
         width: "100%",
       },
     },

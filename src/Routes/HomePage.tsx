@@ -2,12 +2,11 @@ import { SetStateAction, useState } from "react";
 import Carousel from "../Components/Carousel";
 import SearchGame from "../Components/Form/SearchGame";
 import MostPopular from "./MostPopular";
-import { Flex, Icon, Button, Heading, Tag } from "@chakra-ui/react";
+import { Flex, Icon, Button, Heading, Tag, Link } from "@chakra-ui/react";
 import Filters from "../Components/Form/Filters";
 import { IoIosArrowForward, IoIosArrowBack, IoMdHeart } from "react-icons/io";
 
 import { getGamesByGenre } from "../api/GlobalApi";
-import { Link } from "react-router-dom";
 import GameListBox from "../Components/Custom/GameListBox";
 
 const HomePage = () => {
@@ -109,23 +108,24 @@ const HomePage = () => {
             />
           </Flex>
         )}
-        <Link to="favorites" style={{ width: "130px" }}>
-          <Tag
-            bg="red.500"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            _hover={{ bg: "red.600" }}
-            transition=".2s ease"
-            p={1}
-          >
-            My Favorites
-            <Icon
-              as={IoMdHeart}
-              color="blue.800"
-              _hover={{ color: "blue.500" }}
-            />
-          </Tag>
+        <Link
+        borderRadius={4}
+          href="favorites"
+          style={{ width: "130px" }}
+          bg="blue.300"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          _hover={{ bg: "blue.400" }}
+          transition=".2s ease"
+          p={1}
+        >
+          My Favorites
+          <Icon
+            as={IoMdHeart}
+            color="blue.800"
+            _hover={{ color: "blue.700" }}
+          />
         </Link>
       </Flex>
 
