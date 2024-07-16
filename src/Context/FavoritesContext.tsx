@@ -1,7 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { GameProps } from "../types/globalTypes";
 
-// Cria o Contexto
-const FavoritesContext = createContext();
+type FavoritesContextType = {
+  favorites: GameProps[];
+  addFavorite: (item: GameProps) => void;
+  removeFavorite: (item: GameProps) => void;
+};
+
+const FavoritesContext = createContext<FavoritesContextType | null>(null);
 
 // Hook customizado para usar o Contexto
 export const useFavorites = () => {
@@ -13,19 +19,25 @@ export const useFavorites = () => {
 };
 
 // Cria o provedor do Contexto
-export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+export const FavoritesProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [favorites, setFavorites] = useState<GameProps[]>([]);
 
   // Efeito para carregar favoritos do localStorage ao iniciar
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    const storedFavorites = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    );
     if (storedFavorites) {
       setFavorites(storedFavorites);
     }
   }, []);
 
   // Função para adicionar um favorito
-  const addFavorite = (item) => {
+  const addFavorite = (item: GameProps) => {
     setFavorites((prevFavorites) => {
       const newFavorites = [...prevFavorites, item];
       localStorage.setItem("favorites", JSON.stringify(newFavorites));
@@ -34,10 +46,10 @@ export const FavoritesProvider = ({ children }) => {
   };
 
   // Função para remover um favorito
-  const removeFavorite = (item) => {
+  const removeFavorite = (item: GameProps) => {
     setFavorites((prevFavorites) => {
       const newFavorites = prevFavorites.filter(
-        (favorite) => favorite !== item
+        (favorite) => favorite.id !== item.id // Assuming GameProps has an `id` field
       );
       localStorage.setItem("favorites", JSON.stringify(newFavorites));
       return newFavorites;

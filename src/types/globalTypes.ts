@@ -1,11 +1,15 @@
-export interface GameProps {
+export type GameProps = {
+  name: string;
   id: string;
   description: string;
   background_image: string;
   description_raw: string;
+  genres: GenreProps[]; 
   developers: {
     name: string;
   }[];
+  parent_platforms: [];
+  short_screenshots: [];
   platforms: {
     platform: {
       name: string;
@@ -17,7 +21,7 @@ export interface GameProps {
     };
   }[];
   released: string;
-  rating?: number;
+  rating: number;
   website: string;
 
   games: [
@@ -32,31 +36,10 @@ export interface GameProps {
       ];
     }
   ];
-}
+};
 
 export interface TargetGameProps {
-  targetGame: {
-    name: string;
-    short_screenshots: [
-        {
-            image: string
-        }
-    ];
-
-    rating: number;
-    genres: [
-      genre: {
-        name: string;
-      }
-    ];
-    parent_platforms: [
-      platform: {
-        platform: {
-          name: string;
-        };
-      }
-    ];
-  };
+  targetGame: GameProps;
 }
 
 export interface StateProps {

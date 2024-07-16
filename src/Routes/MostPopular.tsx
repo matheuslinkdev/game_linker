@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getBestSellingGames } from "../api/GlobalApi";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import GameListBox from "../Components/Custom/GameListBox";
 
 const MostPopular = () => {

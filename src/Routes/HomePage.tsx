@@ -2,7 +2,7 @@ import { SetStateAction, useState } from "react";
 import Carousel from "../Components/Carousel";
 import SearchGame from "../Components/Form/SearchGame";
 import MostPopular from "./MostPopular";
-import { Flex, Icon, Button, Heading, Tag, Link } from "@chakra-ui/react";
+import { Flex, Icon, Button, Heading, Link } from "@chakra-ui/react";
 import Filters from "../Components/Form/Filters";
 import { IoIosArrowForward, IoIosArrowBack, IoMdHeart } from "react-icons/io";
 

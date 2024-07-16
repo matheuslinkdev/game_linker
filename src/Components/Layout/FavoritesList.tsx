@@ -1,4 +1,3 @@
-import React from "react";
 import { useFavorites } from "../../Context/FavoritesContext";
 import { Box, Center, Heading, keyframes, Text } from "@chakra-ui/react";
 import GameListBox from "../Custom/GameListBox";

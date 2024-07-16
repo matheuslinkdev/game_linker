@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Flex,
   Card,
@@ -19,17 +18,22 @@ import GameModal from "../Layout/GameModal";
 import { Link } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { useFavorites } from "../../Context/FavoritesContext";
+import { GameProps, GenreProps } from "../../types/globalTypes";
 
-const GameCard = ({ games }) => {
+type GamesProps ={
+  games: GameProps[]
+}
+
+const GameCard = ({ games }: GamesProps) => {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  const isLoading = games.length === 0;
+  const isLoading = !games.length;
 
-  const isFavorite = (game) => {
+  const isFavorite = (game: GameProps) => {
     return favorites.some((fav) => fav.id === game.id);
   };
 
-  const handleToggleFavorite = (game) => {
+  const handleToggleFavorite = (game: GameProps) => {
     if (isFavorite(game)) {
       removeFavorite(game);
     } else {
@@ -66,7 +70,7 @@ const GameCard = ({ games }) => {
               </Card>
             ))
         : // Render game cards when games are loaded
-          games.map((game) => (
+          games.map((game: GameProps) => (
             <Card
               w={370}
               maxW="95%"
@@ -99,7 +103,7 @@ const GameCard = ({ games }) => {
                     {game.name}
                   </Heading>
                   <Flex flexWrap="wrap" gap={2}>
-                    {game.genres.map((genre) => (
+                    {game.genres.map((genre: GenreProps) => (
                       <Tag
                         m="0 2px"
                         bgColor="blue.900"

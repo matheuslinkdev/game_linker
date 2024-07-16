@@ -14,22 +14,24 @@ import {
 } from "@chakra-ui/react";
 import ModalCarousel from "../ModalCarousel";
 import Rating from "../Fragments/Rating";
+import { GenreProps } from "../../types/globalTypes";
 
 // Definir a interface diretamente no mesmo arquivo
-interface TargetGameProps {
+type TargetGameProps = {
   name: string;
   rating: number;
-  genres: { name: string }[];
+  genres: GenreProps[];
   parent_platforms: { platform: { name: string } }[];
   short_screenshots: []
 }
 
-// Tipar as props do componente
-interface GameModalProps {
-  targetGame: TargetGameProps;
+type TargetGame = {
+  targetGame: TargetGameProps
 }
 
-const GameModal: React.FC<GameModalProps> = ({ targetGame }) => {
+// Tipar as props do componente
+
+const GameModal = ({ targetGame }: TargetGame) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
